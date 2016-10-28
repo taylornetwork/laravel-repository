@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace TaylorNetwork\Repository;
 
 use Illuminate\Support\ServiceProvider;
 
