@@ -1,0 +1,17 @@
+{
+    "name": "taylornetwork/repository",
+    "description": "A repository service provider to dynamically bind all existing repositories in app.",
+    "authors": [
+        {
+            "name": "Sam Taylor",
+            "email": "sam@taylornetwork.ca"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "TaylorNetwork\\Repository\\": "packages/TaylorNetwork/Repository/src"
+        }
+    }
+}
