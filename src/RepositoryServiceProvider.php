@@ -55,7 +55,7 @@ class RepositoryServiceProvider extends ServiceProvider
             __DIR__.'/config/repository.php', 'repository'
         );
 
-        $this->directory = config('repository.directory', 'DD');
+        $this->directory = config('repository.directory', 'Repositories');
         
         $this->dirPath = app_path() . '/' . $this->directory;
         
@@ -86,10 +86,16 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         //$this->commands([ ]); @todo Actually make the commands work
-        
+
         $this->registerRepositories();
     }
 
+    /**
+     * Fix name
+     *
+     * @param string $name
+     * @return string
+     */
     public function fixName($name)
     {
         return last(explode('/', $name));
@@ -163,7 +169,17 @@ class RepositoryServiceProvider extends ServiceProvider
         }
         else
         {
-            // @todo figure this out
+            $baseInterface = str_replace('{name}', '', $this->naming['interface']);
+            foreach(glob($this->dirPath . '/*.php') as $fileName)
+            {
+                $file = substr($this->fixName($fileName), 0, -4);
+                if(preg_match('/' . $baseInterface . '/', $file))
+                {
+                    $name = str_replace($baseInterface, '', $file);
+                    $this->app->singleton($this->getInterface($name), $this->getClass($name, $this->dirPath));
+                }
+            }
+
         }
     }
 }
