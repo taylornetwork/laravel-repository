@@ -7,21 +7,55 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
+    /**
+     * Repository Directory
+     *
+     * @var string
+     */
     private $directory;
 
+    /**
+     * Path to Directory
+     *
+     * @var string
+     */
     private $dirPath;
 
+    /**
+     * Namespace
+     *
+     * @var string
+     */
     private $namespace;
 
+    /**
+     * Naming Convention
+     *
+     * @var array
+     */
     private $naming;
 
+    /**
+     * Drivers
+     *
+     * @var array
+     */
     private $drivers;
 
+    /**
+     * RepositoryServiceProvider constructor.
+     *
+     * @param Application $app
+     */
     public function __construct(Application $app)
     {
         parent::__construct($app);
 
-        $this->directory = config('repository.directory', 'Repositories');
+        $this->mergeConfigFrom(
+            __DIR__.'/config/repository.php', 'repository'
+        );
+
+        $this->directory = config('repository.directory', 'DD');
         
         $this->dirPath = app_path() . '/' . $this->directory;
         
@@ -51,14 +85,14 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/config/repository.php', 'repository'
-        );
-
         //$this->commands([ ]); @todo Actually make the commands work
-
+        
         $this->registerRepositories();
+    }
 
+    public function fixName($name)
+    {
+        return last(explode('/', $name));
     }
 
     /**
@@ -122,8 +156,9 @@ class RepositoryServiceProvider extends ServiceProvider
         {
             foreach(glob($this->dirPath . '/*') as $repositoryName)
             {
-                $path = $this->dirPath . '/' . $repositoryName;
-                $this->app->singleton($this->getInterface($repositoryName), $this->getClass($repositoryName, $path));
+                $name = $this->fixName($repositoryName);
+                $path = $this->dirPath . '/' . $name;
+                $this->app->singleton($this->getInterface($name), $this->getClass($name, $path));
             }
         }
         else
