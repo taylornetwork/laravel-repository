@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-class DummyClass implements InterfaceName
+class DummyClass implements DummyContract
 {
     //
 }

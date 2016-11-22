@@ -124,7 +124,7 @@ class ClassMakeCommand extends GeneratorCommand
     protected function replaceContract(&$stub)
     {
         $stub = str_replace(
-                    'ContractName',
+                    'DummyContract',
                     str_replace(
                         '{name}',
                         $this->getNameInput(),
