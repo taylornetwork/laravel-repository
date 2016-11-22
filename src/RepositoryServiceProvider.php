@@ -64,7 +64,7 @@ class RepositoryServiceProvider extends ServiceProvider
         
         $this->namespace = 'App\\'.str_replace('{directory}',$this->directory,config('repository.namespace','{directory}')).'\\';
         
-        $this->naming = config('repository.naming', [ 'interface' => '{name}Repository', 'class' => '{driver}{name}' ]);
+        $this->naming = config('repository.naming', [ 'contract' => '{name}Repository', 'class' => '{driver}{name}' ]);
         
         $this->drivers = config('repository.drivers', [ 'Eloquent' ]);
     }
@@ -120,14 +120,14 @@ class RepositoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the interface name
+     * Get the contract name
      *
      * @param string $name
      * @return string
      */
-    public function getInterface($name)
+    public function getContract($name)
     {
-        return $this->replaceNamespace($name) . str_replace('{name}', $name, $this->naming['interface']);
+        return $this->replaceNamespace($name) . str_replace('{name}', $name, $this->naming['contract']);
     }
 
     /**
@@ -171,19 +171,19 @@ class RepositoryServiceProvider extends ServiceProvider
             {
                 $name = $this->fixName($repositoryName);
                 $path = $this->dirPath . '/' . $name;
-                $this->app->singleton($this->getInterface($name), $this->getClass($name, $path));
+                $this->app->singleton($this->getContract($name), $this->getClass($name, $path));
             }
         }
         else
         {
-            $baseInterface = str_replace('{name}', '', $this->naming['interface']);
+            $baseContract = str_replace('{name}', '', $this->naming['contract']);
             foreach(glob($this->dirPath . '/*.php') as $fileName)
             {
                 $file = substr($this->fixName($fileName), 0, -4);
-                if(preg_match('/' . $baseInterface . '/', $file))
+                if(preg_match('/' . $baseContract . '/', $file))
                 {
-                    $name = str_replace($baseInterface, '', $file);
-                    $this->app->singleton($this->getInterface($name), $this->getClass($name, $this->dirPath));
+                    $name = str_replace($baseContract, '', $file);
+                    $this->app->singleton($this->getContract($name), $this->getClass($name, $this->dirPath));
                 }
             }
 
