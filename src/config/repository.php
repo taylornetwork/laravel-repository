@@ -42,11 +42,11 @@ return [
      |
      | How you intend on naming your repositories.
      | {name} is replaced by repository name.
-     | {driver} is replaced by a driver in the driver variable below.
+     | {driver} is replaced by a driver in the driver array below.
      |
      */
     'naming' => [
-        'interface' => '{name}Repository',
+        'contract' => '{name}Repository',
         'class' => '{driver}{name}',
     ],
 
@@ -58,6 +58,9 @@ return [
      | The drivers that you will use in order of search. Service provider will 
      | look for the first value and if one is found using the naming convention
      | above it will add that as a singleton. 
+     |
+     | Note: When you run 'php artisan make:repository Model' with no driver 
+     |      option, the first value in this array is used.
      |
      */
     'drivers' => [

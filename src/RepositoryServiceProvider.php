@@ -1,9 +1,12 @@
 <?php
 
-namespace TaylorNetwork\Repository;
+namespace TaylorNetwork\LaravelRepository;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use TaylorNetwork\LaravelRepository\Commands\ClassMakeCommand;
+use TaylorNetwork\LaravelRepository\Commands\ContractMakeCommand;
+use TaylorNetwork\LaravelRepository\Commands\RepositoryMakeCommand;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -85,7 +88,11 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->commands([ ]); @todo Actually make the commands work
+        $this->commands([ 
+            RepositoryMakeCommand::class,
+            ClassMakeCommand::class,
+            ContractMakeCommand::class
+        ]);
 
         $this->registerRepositories();
     }
