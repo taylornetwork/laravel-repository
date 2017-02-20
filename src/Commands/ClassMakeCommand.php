@@ -89,7 +89,7 @@ class ClassMakeCommand extends GeneratorCommand
      */
     public function fire()
     {
-        $name = $this->parseName($this->getConfigName());
+        $name = $this->qualifyClass($this->getConfigName());
 
         $path = $this->getPath($name);
 
