@@ -11,7 +11,7 @@ class RepositoryMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:repository {name} {--driver=default}';
+    protected $signature = 'repository:generate {name} {--driver=default}';
 
     /**
      * The console command description.
