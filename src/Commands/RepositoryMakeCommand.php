@@ -36,8 +36,8 @@ class RepositoryMakeCommand extends Command
     public function handle()
     {
         $name = ucwords($this->argument('name'));
-        $this->call('make:repositoryContract', [ 'name' => $name ]);
-        $this->call('make:repositoryClass', [ 'name' => $name, '--driver' => $this->option('driver') ]);
+        $this->call('repository:contract', [ 'name' => $name ]);
+        $this->call('repository:class', [ 'name' => $name, '--driver' => $this->option('driver') ]);
     }
     
 }
