@@ -44,7 +44,7 @@ The default naming convention used is `ModelNameRepository` for the contract and
 
 #### make:repository
 
-This package adds the artisan command `make:repository` to create the repository pattern based on settings in `config/repository.php`
+This package adds the artisan command `repository:generate` to create the repository pattern based on settings in `config/repository.php`
 
 To create a repository for the `User` model
 
@@ -67,7 +67,7 @@ Will create
 If you are using a driver other than `Eloquent` you can specify using the `--driver` option
 
 ``` bash
-$ php artisan make:repository User --driver=storage
+$ php artisan repository:generate User --driver=storage
 ```
 Will create
 
@@ -85,20 +85,20 @@ Will create
 
 #### make:repositoryClass
 
-Same as `make:repository` but will only create the class, no contract.
+Same as `repository:generate` but will only create the class, no contract.
 
 ``` bash
-$ php artisan make:repositoryClass User --driver=storage
+$ php artisan repository:class User --driver=storage
 ```
 
 Creates `app/Repositories/User/StorageUser.php`
 
 #### make:repositoryContract
 
-Same as `make:repository` but will only create the contract, no class. 
+Same as `repository:generate` but will only create the contract, no class. 
 
 ``` bash
-$ php artisan make:repositoryContract User 
+$ php artisan repository:contract User 
 ```
 
 Creates `app/Repositories/User/UserRepository.php`
