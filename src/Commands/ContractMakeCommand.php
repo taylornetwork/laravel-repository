@@ -11,7 +11,7 @@ class ContractMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:repositoryContract';
+    protected $name = 'repository:contract';
 
     /**
      * The console command description.
