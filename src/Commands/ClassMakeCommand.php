@@ -11,7 +11,7 @@ class ClassMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'make:repositoryClass {name} {--driver=default}';
+    protected $signature = 'repository:class {name} {--driver=default}';
 
     /**
      * The console command description.
