@@ -49,7 +49,7 @@ This package adds the artisan command `repository:generate` to create the reposi
 To create a repository for the `User` model
 
 ``` bash
-$ php artisan make:repository User
+$ php artisan repository:generate User
 ```
 
 Will create

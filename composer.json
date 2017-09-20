@@ -9,11 +9,22 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "laravel/framework": "5.5.*"
+        "illuminate/support": "5.5.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.0",
+        "mockery/mockery": "dev-master"
     },
     "autoload": {
         "psr-4": {
             "TaylorNetwork\\LaravelRepository\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TaylorNetwork\\LaravelRepository\\RepositoryServiceProvider"
+            ]
         }
     }
 }
